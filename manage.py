@@ -1,7 +1,7 @@
 from app import create_app
-import app_secrets
+import variables
 
-FLASK_ENV = app_secrets.FLASK_ENV
+FLASK_ENV = variables.FLASK_ENV
 
 if FLASK_ENV == 'development':
     app = create_app(config_object='config.DevelopmentConfig')

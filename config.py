@@ -1,9 +1,9 @@
-import app_secrets
+import variables
 
 
 class Config:
-    SECRET_KEY = app_secrets.SECRET_KEY
-    FLASK_ENV = app_secrets.FLASK_ENV
+    SECRET_KEY = variables.SECRET_KEY
+    FLASK_ENV = variables.FLASK_ENV
 
 
 class DevelopmentConfig(Config):
