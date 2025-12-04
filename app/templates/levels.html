@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {% block content %}
+
+    {% endblock %}
+
+    <form method="POST" id="submit-form">
+        <input type="text" id="submit-code" placeholder="Enter code">
+        <button type="submit" id="submit-button">Submit</button>
+    </form>
+
+    <div id="clue-container">
+        <button id="get-clue-button">Get Clue</button>
+        <div id="clue-text"></div>
+    </div>
+{% endblock %}
