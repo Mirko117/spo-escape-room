@@ -6,7 +6,7 @@ def create_app(config_object="config.ProductionConfig") -> Flask:
 
     app.config.from_object(config_object)
 
-    from .pages import index_bp
-    app.register_blueprint(index_bp)
+    from .pages import pages_bp
+    app.register_blueprint(pages_bp)
 
     return app
