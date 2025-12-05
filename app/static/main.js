@@ -9,7 +9,7 @@ $(document).ready(function() {
             return;
         }
 
-        var levelNumber = $("#level-number").text().trim();
+        var levelNumber = getLevelFromURL(window.location.pathname);
 
         $.ajax({
             type: "POST",
@@ -32,7 +32,7 @@ $(document).ready(function() {
     });
 
     $("#get-clue-button").click(function() {
-        var levelNumber = $("#level-number").text().trim();
+        var levelNumber = getLevelFromURL(window.location.pathname);
 
         $.ajax({
             type: "GET",
@@ -46,3 +46,10 @@ $(document).ready(function() {
         });
     });
 });
+
+
+function getLevelFromURL(url) {
+    const urlParts = url.split('/');
+    const level = urlParts[urlParts.indexOf('levels') + 1];
+    return level;
+}
