@@ -21,7 +21,11 @@ def submit(n):
             session["completed_levels"] = completed_levels
             return jsonify({"result": "correct"})
         
-    # else if ...
+    if n == 2:
+        if code == "zeloZahtevnoGeslo":
+            completed_levels.append(n)
+            session["completed_levels"] = completed_levels
+            return jsonify({"result": "correct"})
     
     return jsonify({"result": "incorrect"})
 
@@ -31,10 +35,12 @@ def clue(n):
     if n-1 not in session.get("completed_levels", [0]):
         abort(403, description="Level is not unlocked.")
 
-    # example:
     if (n == 1):
         return jsonify({
-            "clue": "Inspect image."
+            "clue": "Inspect element."
         })
-    # ...
+    if (n == 2):
+        return jsonify({
+            "clue": "URL (base64)"
+        })
     

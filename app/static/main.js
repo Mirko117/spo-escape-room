@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    var levelNumber = getLevelFromURL(window.location.pathname);
+    if (levelNumber == 2) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('code', 'emVsb1phaHRldm5vR2VzbG8=');
+        window.history.pushState({}, '', url);
+    }
+
     $("#submit-form").submit(function(e) {
         e.preventDefault();
         
@@ -8,8 +15,6 @@ $(document).ready(function() {
         if (code === "") {
             return;
         }
-
-        var levelNumber = getLevelFromURL(window.location.pathname);
 
         $.ajax({
             type: "POST",
@@ -24,7 +29,6 @@ $(document).ready(function() {
                     alert("Incorrect code. Try again.");
                 }
             },
-
             error: function(xhr, status, error) {
                 console.error("Error submitting code:", error);
             }
@@ -32,7 +36,6 @@ $(document).ready(function() {
     });
 
     $("#get-clue-button").click(function() {
-        var levelNumber = getLevelFromURL(window.location.pathname);
 
         $.ajax({
             type: "GET",
