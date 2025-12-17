@@ -54,6 +54,7 @@ $(document).ready(function() {
     });
 
     $("#get-clue-button").on("click", function() {
+        $(this).prop("disabled", true);
 
         $.ajax({
             type: "GET",

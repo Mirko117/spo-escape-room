@@ -28,7 +28,7 @@ def submit(n):
             return jsonify({"result": "correct"})
     
     if n == 3: 
-        if code == "184161785232162357326496453395931":
+        if code == "1841617852321623573264964533959319":
             completed_levels.append(n)
             session["completed_levels"] = completed_levels
             return jsonify({"result": "correct"})
