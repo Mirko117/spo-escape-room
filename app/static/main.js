@@ -3,8 +3,15 @@ $(document).ready(function() {
     var levelNumber = getLevelFromURL(window.location.pathname);
     if (levelNumber == 2) {
         const url = new URL(window.location.href);
-        url.searchParams.set('code', 'emVsb1phaHRldm5vR2VzbG8=');
+        url.searchParams.set('code', 'emVsb1phaHRldm5vR2VzbG8');
         window.history.pushState({}, '', url);
+    }
+    else if (levelNumber == 4) {
+        $("#submit-form").hide();
+        $("#submit-code").val("KONEC");
+        $("#click-me-button").on("click", function () {
+            $("#submit-form").submit();
+        });
     }
 
     $("#submit-form").submit(function(e) {
@@ -22,11 +29,22 @@ $(document).ready(function() {
             contentType: "application/json",
             data: JSON.stringify({ code: code }),
             success: function(response) {
+                console.log(response);
                 if (response.result === "correct") {
-                    alert("Correct code! Level completed.");
-                    window.location.href = "/levels/" + (parseInt(levelNumber) + 1);
+                    alert("Rešitev je pravilna!");
+
+                    if (response.status) {
+                        // Handle redirect
+                        if (response.status === 302 && response.url) {
+                            window.location.href = response.url;
+                        }
+                    }
+                    else {
+                        window.location.href = "/levels/" + (parseInt(levelNumber) + 1);
+                    }
+                    ž
                 } else {
-                    alert("Incorrect code. Try again.");
+                    alert("Napačna rešitev.");
                 }
             },
             error: function(xhr, status, error) {
@@ -35,7 +53,7 @@ $(document).ready(function() {
         });
     });
 
-    $("#get-clue-button").click(function() {
+    $("#get-clue-button").on("click", function() {
 
         $.ajax({
             type: "GET",

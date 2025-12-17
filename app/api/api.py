@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, session, abort
+from flask import Blueprint, jsonify, request, session, abort, redirect
 
 api_bp = Blueprint("api", __name__)
 
@@ -27,6 +27,18 @@ def submit(n):
             session["completed_levels"] = completed_levels
             return jsonify({"result": "correct"})
     
+    if n == 3: 
+        if code == "184161785232162357326496453395931":
+            completed_levels.append(n)
+            session["completed_levels"] = completed_levels
+            return jsonify({"result": "correct"})
+        
+    if n == 4:
+        if code == "KONEC":
+            completed_levels.append(n)
+            session["completed_levels"] = completed_levels
+            return jsonify({"result": "correct", "status": 302, "url": "/finish"})
+    
     return jsonify({"result": "incorrect"})
 
 
@@ -44,3 +56,12 @@ def clue(n):
             "clue": "URL (base64)"
         })
     
+    if (n == 3):
+        return jsonify({
+            "clue": "Napiši kodo s pomočjo slike."
+        })
+    
+    if (n == 4):
+        return jsonify({
+            "clue": "Klikni na gumb 'Klikni me' (čeprav je onemogočen)."
+        })
